@@ -112,6 +112,7 @@ export class GameScene extends Phaser.Scene {
     this.playerSprite.scale = 1;
     this.cameras.main.startFollow(this.playerSprite);
     this.cameras.main.roundPixels = true;
+    this.cameras.main.setFollowOffset(-120, -80)
     this.player = new Player(this.playerSprite, new Phaser.Math.Vector2(packet.x, packet.y));
     this.player.socket = this.socket;
     this.playerSprite.play(display_unit.unit_class+"_idle");

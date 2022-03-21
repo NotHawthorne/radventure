@@ -12,6 +12,7 @@ export class Player {
     map_id = 0;
     online = false;
     socket = null;
+    acl_level = 0;
 
     move(direction) {
         if (direction == "up" && this.y > 0)
@@ -70,7 +71,8 @@ export class Player {
             "\"x\": " + this.x + ", " + 
             "\"y\": " + this.y + ", " + 
             "\"map_id\": " + this.map_id + ", " +
-            "\"online\":" + this.online + 
+            "\"online\":" + this.online + ", " +
+            "\"acl_level\":" + this.acl_level +
             "}";
         return ret;
     }

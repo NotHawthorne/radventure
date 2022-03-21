@@ -26,8 +26,10 @@ export class Item {
 
     toString() {
         var enchantStr = "[ ";
-        for (enchant in this.enchants) {
-            enchantStr += enchant.toString() + ", ";
+        for (var enchant in this.enchants) {
+            if (enchant > 0)
+                enchantStr += ", ";
+            enchantStr += this.enchants[enchant].toString();
         }
         enchantStr += "] "
         var ret = "{ " + 

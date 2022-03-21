@@ -68,7 +68,7 @@ function initializePlayer(id, socket) {
             ni.become(itemBase[rows[i].base_id]);
             if (rows[i].enchant_key in enchantInstance) {
                 for (var enchant in enchantInstance[rows[i].enchant_key]) {
-                    ni.enchants.push(enchant);
+                    ni.enchants.push(enchantInstance[rows[i].enchant_key][enchant]);
                 }
             }
             ni.amount = rows[i].amount;
@@ -171,25 +171,30 @@ class Db {
             for (var i = 0; i < rows.length; i++) {
                 var ne = new Enchant();
                 ne.id = rows[i].id;
-                if (rows[i].effectClass == "statEffect") {
-                    ne.stats[rows[i].identifier] += rows[i].amt_max;
+                ne.name = rows[i].name;
+                ne.uuid = 0;
+                if (rows[i].effect_class == "statEffect") {
+                    ne.stats[rows[i].identifier] = Number(rows[i].amt_max);
                 }
-                else if (rows[i].effectClass == "procAbility") {
-                    ne.procChance = rows[i].amt_max;
-                    ne.procAbilityId = rows[i].identifier;
+                else if (rows[i].effect_class == "procAbility") {
+                    ne.procChance = Number(rows[i].amt_max);
+                    ne.procAbilityId = Number(rows[i].identifier);
                 }
                 enchantBase[rows[i].id] = ne;
+                console.log(rows[i].effect_class);
             }
             console.log("loaded " + rows.length + " entries from enchant_base");
         });
         Db.con.query('SELECT * FROM enchant_instances', function (err, rows, fields) {
             if (err) throw err;
             for (var i = 0; i < rows.length; i++) {
-                var ne = new Enchant(enchantBase[rows[i].enchant_base_id]);
+                var ne = new Enchant();
+                ne.become(enchantBase[rows[i].enchant_base_id]);
                 if (!(rows[i].enchant_key in enchantInstance))
                     enchantInstance[rows[i].enchant_key] = [];
-                ne.uuid = rows[i].id;
-                enchantInstance[rows[i].enchant_key] = ne;
+                ne.uuid = rows[i].enchant_key;
+                enchantInstance[rows[i].enchant_key].push(ne);
+                console.log(ne);
             }
             console.log("loaded " + rows.length + " entries from enchant_instance");
         });

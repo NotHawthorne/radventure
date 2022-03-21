@@ -5,6 +5,7 @@ export class Enchant {
     stats = new StatContainer();
     procs = [];
     name = "";
+    isPrefix = false;
     level = 0;
     procChance = -1;
     procAbilityId =  0;
@@ -38,15 +39,17 @@ export class Enchant {
     Enchant() { };
 
     toString() {
-        return "{ " +
-            "name: " + this.name + ", " +
-            "stats: " + this.stats.toString(), + ", " + 
-            "level: " + this.level + ", " + 
-            "procChance: " + this.procChance + ", " + 
-            "procAbilityId: " + this.procAbilityId + ", " +
-            "id: " + this.id + ", " + 
-            "uuid: " + this.uuid + 
+        var ret = "{ " +
+            "\"name\": \"" + this.name + "\", " +
+            "\"isPrefix\": " + this.isPrefix + ", " + 
+            "\"stats\": " + this.stats.toString() + ", " + 
+            "\"level\": " + this.level + ", " + 
+            "\"procChance\": " + this.procChance + ", " + 
+            "\"procAbilityId\": " + this.procAbilityId + ", " +
+            "\"id\": " + this.id + ", " + 
+            "\"uuid\": " + this.uuid + 
             " }";
+        return ret;
     }
 }
 
