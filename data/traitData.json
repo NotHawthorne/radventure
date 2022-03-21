@@ -1,0 +1,49 @@
+{
+    "traits": [
+        {
+            "name": "Stocky",
+            "effects": [
+                {
+                    "class": "statEffect",
+                    "id": "Health",
+                    "type": "pct",
+                    "amt": 10
+                },
+                {
+                    "class": "statEffect",
+                    "id": "Alacrity",
+                    "type": "pct",
+                    "amt": -5
+                }
+            ]
+        },
+        {
+            "name": "Sickly",
+            "effects": [
+                {
+                    "class": "statEffect",
+                    "id": "Alacrity",
+                    "type": "pct",
+                    "amt": -5
+                },
+                {
+                    "class": "statEffect",
+                    "id": "Strength",
+                    "type": "pct",
+                    "amt": -10
+                }
+            ]
+        },
+        {
+            "name": "Deft",
+            "effects": [
+                {
+                    "class": "statEffect",
+                    "id": "Alacrity",
+                    "type": "pct",
+                    "amt": 10
+                }
+            ]
+        }
+    ]
+}

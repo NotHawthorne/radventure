@@ -1,0 +1,29 @@
+{
+    "itemTraits": [
+        {
+            "nameString": " of Striking",
+            "isPrefix": false,
+            "effects": [
+                {
+                    "class": "statEffect",
+                    "id": "Weapon Damage",
+                    "type": "range",
+                    "amtMin": 1,
+                    "amtMax": 4
+                }
+            ]
+        },
+        {
+            "nameString": " of Fire",
+            "isPrefix": false,
+            "effects": [
+                {
+                    "class": "chanceOnHit",
+                    "id": "Fireball",
+                    "type": "pct",
+                    "amt": 10
+                }
+            ]
+        }
+    ]
+}

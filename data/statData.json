@@ -1,0 +1,30 @@
+{
+    "stats": [
+        "Strength",
+        "Stamina",
+        "Intellect",
+        "Wisdom",
+        "Alacrity",
+        "Luck",
+        "Weapon Damage",
+        "Spell Damage",
+        "Bonus Healing",
+        "Damage Reduction",
+        "Spell Resistance",
+        "Dodge Chance",
+        "Parry Chance",
+        "Block Chance",
+        "Critical Hit Chance",
+        "Hit Chance",
+        "Health",
+        "Health Regeneration",
+        "Mana",
+        "Mana Regeneration",
+        "Magic Find",
+        "Gold Find",
+        "Life On Hit",
+        "Minimum Damage",
+        "Maximum Damage",
+        "Armor"
+    ]
+}

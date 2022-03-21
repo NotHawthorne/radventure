@@ -1,0 +1,29 @@
+{
+    "spells": [
+        {
+            "name": "Fireball",
+            "description": "Shoot a magical fiery ball at the enemy, dealing damage, and causing the enemy to burn over 3 turns.",
+            "mana": 10,
+            "classes": [
+                "Mage"
+            ],
+            "effects": [
+                {
+                    "class": "dmg",
+                    "id": "fire",
+                    "type": "range",
+                    "amtMin": 5,
+                    "amtMax": 8,
+                    "duration": -1
+                },
+                {
+                    "class": "dot",
+                    "id": "fire",
+                    "type": "flat",
+                    "amt": 3,
+                    "duration": 3
+                }
+            ]
+        }
+    ]
+}

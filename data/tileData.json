@@ -1,0 +1,50 @@
+{
+    "floorTiles": {
+        "name": "floorTiles",
+        "filePath": "sprites/Objects/Floor.png"
+    },
+    "treeTiles0": {
+        "name": "treeTiles0",
+        "filePath": "sprites/Objects/Tree0.png"
+    },
+    "treeTiles1": {
+        "name": "treeTiles1",
+        "filePath": "sprites/Objects/Tree1.png"
+    },
+    "hillTiles0": {
+        "name": "hillTiles0",
+        "filePath": "sprites/Objects/Hill0.png"
+    },
+    "hillTiles1": {
+        "name": "hillTiles1",
+        "filePath": "sprites/Objects/Hill1.png"
+    },
+    "doorTiles0": {
+        "name": "doorTiles0",
+        "filePath": "sprites/Objects/Door0.png"
+    },
+    "doorTiles1": {
+        "name": "doorTiles1",
+        "filePath": "sprites/Objects/Door1.png"
+    },
+    "pitTiles0": {
+        "name": "pitTiles0",
+        "filePath": "sprites/Objects/Pit0.png"
+    },
+    "pitTiles1": {
+        "name": "pitTiles1",
+        "filePath": "sprites/Objects/Pit1.png"
+    },
+    "decoTiles0": {
+        "name": "decoTiles0",
+        "filePath": "sprites/Objects/Decor0.png"
+    },
+    "decoTiles1": {
+        "name": "decoTiles1",
+        "filePath": "sprites/Objects/Decor1.png"
+    },
+    "wallTiles": {
+        "name": "wallTiles",
+        "filePath": "sprites/Objects/Wall.png"
+    }
+}

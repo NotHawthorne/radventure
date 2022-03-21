@@ -1,0 +1,33 @@
+{
+    "items": [
+        {
+            "name": "Worn Shortsword",
+            "type": "One-Handed",
+            "subtype": "Sword",
+            "slot": "OneHand",
+            "level": 1,
+            "effects": [
+                {
+                    "class": "statEffect",
+                    "id": "Minimum Damage",
+                    "type": "flat",
+                    "amt": 3
+                },
+                {
+                    "class": "statEffect",
+                    "id": "Maximum Damage",
+                    "type": "flat",
+                    "amt": 5
+                }
+            ]
+        },
+        {
+            "name": "Slime",
+            "type": "Misc",
+            "subtype": "none",
+            "slot": "none",
+            "level": 0,
+            "effects": []
+        }
+    ]
+}

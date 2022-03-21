@@ -1,0 +1,357 @@
+{
+    "activeFile": "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/spawn.tmx",
+    "expandedProjectPaths": [
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled",
+        "C:/Users/Beefaroni/Documents/radventure/radventure/RadVenture/Resources",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Characters",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples",
+        "C:/Users/Beefaroni/Documents/radventure/radventure/RadVenture/Resources/Tileset",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites"
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "C:/Users/Beefaroni/Documents/radventure/radventure/RadVenture/Resources/Tilemap/tutorial.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2.5,
+                "y": -41.5
+            }
+        },
+        "C:/Users/Beefaroni/Documents/radventure/radventure/RadVenture/Resources/Tileset/ground.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        },
+        "C:/Users/Beefaroni/Documents/radventure/radventure/RadVenture/Resources/Tileset/tree.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Blank.tmx": {
+            "scale": 2.343898809523809,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 152.31032950288875,
+                "y": 120.09904133070918
+            }
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Blank.tmx#Decor0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Blank.tmx#Door0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Blank.tmx#Floor": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Blank.tmx#Ground0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Blank.tmx#Pit0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Blank.tmx#Wall": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx": {
+            "scale": 2.46109375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 159.68509935877088,
+                "y": 120.06856707510634
+            }
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Chest0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Decor0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Door0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Floor": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Ground0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Money": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Pest0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Pit0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Player0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Rodent0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Undead0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx#Wall": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Logo.tmx": {
+            "scale": 3.281458333333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 120.06856707510639,
+                "y": 96.14627642689354
+            }
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Logo.tmx#Wall": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx": {
+            "scale": 2.46109375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 160.09142276680848,
+                "y": 120.06856707510634
+            }
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Avian0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Decor0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Door0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Elemental0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Floor": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Food": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Ground0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#LongWep": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Misc0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Ore0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Pit0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Player0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx#Wall": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx": {
+            "scale": 2.46109375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 160.09142276680848,
+                "y": 119.66224366706876
+            }
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Cat0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Container0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Decor0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Door0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Floor": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Ground0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Humanoid0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Pit0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Player0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Quadraped0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Tree0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx#Wall": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Decor0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Door0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Floor.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Hill1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Tree0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/spawn.tmx": {
+            "scale": 2,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 2660,
+                "y": 2137.75
+            }
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/spawn.tmx#Decor0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/spawn.tmx#Door0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/spawn.tmx#Floor": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/spawn.tmx#Hill1": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/spawn.tmx#Tree0": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/spawn.tmx#Wall": {
+            "scaleInDock": 1
+        },
+        "Decor0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Decor1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Door0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Door1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Effect0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Fence.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Floor.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Ground0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Ground1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Hill0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Hill1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Pit0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Pit1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tree0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tree1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Wall.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "spawn.tmj": {
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1900.333333333333,
+                "y": 2249.6666666666665
+            }
+        },
+        "spawn.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 3050,
+                "y": 2395.333333333333
+            }
+        }
+    },
+    "last.imagePath": "C:/Users/Beefaroni/Radventure_Phaser/sprites/Objects",
+    "openFiles": [
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Blank.tmx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Logo.tmx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Decor0.tsx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Door0.tsx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Floor.tsx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Hill1.tsx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Tree0.tsx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/spawn.tmx"
+    ],
+    "project": "Radventure_Phaser.tiled-project",
+    "recentFiles": [
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Dungeon.tmx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Blank.tmx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Logo.tmx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Mine.tmx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/Examples/Town.tmx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Decor0.tsx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Door0.tsx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Floor.tsx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Hill1.tsx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/Tree0.tsx",
+        "C:/Users/Beefaroni/Radventure_Phaser/sprites/tiled/spawn.tmx",
+        "Tree0.tsx"
+    ]
+}

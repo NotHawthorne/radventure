@@ -1,0 +1,32 @@
+{
+    "spawn": {
+        "name": "spawn",
+        "filePath": "sprites/tiled/spawn.tmj",
+        "tileData": [
+            {
+                "name": "floorTiles",
+                "layerName": "ground"
+            },
+            {
+                "name": "decoTiles0",
+                "layerName": "deco"
+            },
+            {
+                "name": "doorTiles0",
+                "layerName": "doors"
+            },
+            {
+                "name": "hillTiles1",
+                "layerName": "hills"
+            },
+            {
+                "name": "wallTiles",
+                "layerName": "walls"
+            },
+            {
+                "name": "treeTiles0",
+                "layerName": "trees"
+            }
+        ]
+    }
+}

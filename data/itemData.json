@@ -1,0 +1,45 @@
+{
+    "types": [
+        "Misc",
+        "One-Handed",
+        "Two-Handed",
+        "Off-Hand",
+        "Armor",
+        "Consumable"
+    ],
+    "slots": [
+        "none",
+        "Head",
+        "Shoulders",
+        "Chest",
+        "Pants",
+        "Gloves",
+        "Feet",
+        "Ring1",
+        "Ring2",
+        "MainHand",
+        "OffHand",
+        "BothHands",
+        "OneHand",
+        "Neck"
+    ],
+    "armorTypes": [
+        "none",
+        "Light",
+        "Medium",
+        "Heavy"
+    ],
+    "weaponTypes": [
+        "none",
+        "Sword",
+        "Shield",
+        "Axe",
+        "Hammer",
+        "Staff",
+        "Wand",
+        "Gun",
+        "Bow",
+        "Fist",
+        "Spear"
+    ]
+}

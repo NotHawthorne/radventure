@@ -1,0 +1,25 @@
+{
+    "classes": [
+        { "name": "None", "sprite": "sprites/Characters/classes/humanBase.png", "armorClass": "light" },
+        { "name": "Knight", "sprite": "sprites/Characters/classes/humanKnight.png", "armorClass": "heavy"},
+        { "name": "Ranger", "sprite": "sprites/Characters/classes/humanRanger.png", "armorClass": "medium" },
+        { "name": "Barbarian", "sprite": "sprites/Characters/classes/humanBarbarian.png", "armorClass": "heavy" },
+        { "name": "Duelist", "sprite": "sprites/Characters/classes/humanDuelist.png", "armorClass": "medium" },
+        { "name": "Mage", "sprite": "sprites/Characters/classes/humanMage.png", "armorClass": "light" },
+        { "name": "Monk", "sprite": "sprites/Characters/classes/humanMonk.png", "armorClass": "medium" },
+        { "name": "Priest", "sprite": "sprites/Characters/classes/humanPriest.png", "armorClass": "light" },
+        { "name": "Gunslinger", "sprite": "sprites/Characters/classes/humanGunslinger.png", "armorClass": "medium" },
+        { "name": "Crusader", "sprite": "sprites/Characters/classes/humanCrusader.png", "armorClass": "heavy" },
+        { "name": "Martial Artist", "sprite": "sprites/Characters/classes/humanMartialArtist.png", "armorClass": "medium" },
+        { "name": "Fighter", "sprite": "sprites/Characters/classes/elfFighter.png", "armorClass": "heavy" },
+        { "name": "Naturalist", "sprite": "sprites/Characters/classes/elfNaturalist.png", "armorClass": "medium" },
+        { "name": "Berserker", "sprite": "sprites/Characters/classes/elfBerserker.png", "armorClass": "heavy" },
+        { "name": "Paladin", "sprite": "sprites/Characters/classes/elfPaladin.png", "armorClass": "heavy" },
+        { "name": "Enchantress", "sprite": "sprites/Characters/classes/elfEnchanter.png", "armorClass": "light" },
+        { "name": "Ninja", "sprite": "sprites/Characters/classes/elfNinja.png", "armorClass": "light" },
+        { "name": "Tracker", "sprite": "sprites/Characters/classes/elfTracker.png", "armorClass": "medium" },
+        { "name": "Beastmaster", "sprite": "sprites/Characters/classes/elfBeastmaster.png", "armorClass": "medium" },
+        { "name": "Druid", "sprite": "sprites/Characters/classes/elfDruid.png", "armorClass": "medium" },
+        { "name": "Brawler", "sprite": "sprites/Characters/classes/elfBrawler.png", "armorClass": "medium" }
+    ]
+}
