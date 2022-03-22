@@ -60,19 +60,19 @@ export class GridPhysics {
             switch (this.movementDirection.valueOf()) {
                 case Direction.UP.valueOf():
                     newPos.add(new Vector2(0, -16));
-                    this.player.socket.emit('move', { "direction": "up"});
+                    this.player.socket.emit('move', {'direction': 'up'});
                     break ;
                 case Direction.DOWN.valueOf():
                     newPos.add(new Vector2(0, 16));
-                    this.player.socket.emit('move', { "direction": "down"});
+                    this.player.socket.emit('move', {'direction': 'down'});
                     break ;
                 case Direction.LEFT.valueOf():
                     newPos.add(new Vector2(-16, 0));
-                    this.player.socket.emit('move', { "direction": "left"});
+                    this.player.socket.emit('move', {'direction': 'left'});
                     break ;
                 case Direction.RIGHT.valueOf():
                     newPos.add(new Vector2(16, 0));
-                    this.player.socket.emit('move', { "direction": "right"});
+                    this.player.socket.emit('move', {'direction': 'right'});
                     break ;
             }
             this.walkCooldown = 250;

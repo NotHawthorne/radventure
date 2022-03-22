@@ -36,7 +36,9 @@ export class GameScene extends Phaser.Scene {
   private socket = null;
   private player = null;
   private playerSprite = null;
-  private loadedUnits = [];
+  private mainPlayer = null;
+  private loadedUnits = {};
+  private loadedPlayers = {};
 
   constructor() {
     super(sceneConfig);
@@ -76,8 +78,6 @@ export class GameScene extends Phaser.Scene {
   public preloadSprites() {
     console.log("sprites");
     for (const c of classData["classes"]) {
-      console.log(c);
-      console.log(c["sprite"]);
       this.load.spritesheet(c["name"], c["sprite"], {
         "frameWidth": 16,
         "frameHeight": 16,
@@ -99,24 +99,62 @@ export class GameScene extends Phaser.Scene {
 
   }
 
-  public addUnit(unit) {
+  public addPlayer(player, isSelf) {
+    console.log("LOAD PLAYER " + player.name + "AT " + player.x + ", " + player.y)
+    var display_char = player.party[0];
+    this.loadedPlayers[player.name] = player;
+    this.loadedPlayers[player.name].sprite = this.add.sprite((player.x * 16), (player.y * 16), display_char.unit_class);
+    if (this.mainPlayer != null)
+      console.log(this.mainPlayer.sprite.x, this.mainPlayer.sprite.y);
+    this.loadedPlayers[player.name].sprite.setDepth(2);
+    this.loadedPlayers[player.name].sprite.scale = 1;
+      this.loadedPlayers[player.name].sprite.offsetX = 8;
+      this.loadedPlayers[player.name].sprite.offsetY = 8;
+    this.loadedPlayers[player.name].sprite.setPosition((Number(player.x) * 16) + 8, (player.y * 16) + 8);
+    if (isSelf == true) {
+      console.log(this.loadedPlayers[player.name].sprite.x, this.loadedPlayers[player.name].sprite.y);
+      this.loadedPlayers[player.name].sprite.setPosition((Number(player.x) * 16) + 8, (player.y * 16) + 16);
+      this.loadedPlayers[player.name].sprite.offsetY = 16;
+      this.loadedPlayers[player.name].sprite.x = player.x * 16;
+      this.loadedPlayers[player.name].sprite.y = player.y * 16;
+      this.cameras.main.startFollow(this.loadedPlayers[player.name].sprite);
+      this.cameras.main.roundPixels = false;
+      this.cameras.main.setFollowOffset(-128, -64);
+      this.mainPlayer = player;
+      console.log(this.cameras.main);
+    }
+    this.loadedPlayers[player.name].sprite.play(display_char.unit_class+"_idle");
+    return this.loadedPlayers[player.name];
+  }
 
+  public removePlayer(player) {
+    this.loadedPlayers[player.name].sprite.destroy();
+    delete this.loadedPlayers[player.name];
+  }
+
+  public updatePlayer(player) {
+    console.log("updating player");
+    if (this.loadedPlayers[player.name].x != player.x || this.loadedPlayers[player.name].y != player.y) {
+      this.loadedPlayers[player.name].x = player.x;
+      this.loadedPlayers[player.name].y = player.y;
+      this.loadedPlayers[player.name].sprite.x = (player.x * 16) + this.loadedPlayers[player.name].sprite.offsetX;
+      this.loadedPlayers[player.name].sprite.y = (player.y * 16) + this.loadedPlayers[player.name].sprite.offsetY;
+      console.log(this.loadedPlayers[player.name].sprite.x, ", ", this.loadedPlayers[player.name].sprite.y);
+      console.log(player.x, ", ", player.y);
+    }
+  }
+
+  public addUnit(unit) {
+    console.log("LOADING " + JSON.stringify(unit));
+    this.loadedUnits[unit.name] = unit;
+    this.add.sprite(1, 1, unit.unit_class);
   }
 
   public handleLogin(packet) {
     game.scene.start('UiScene');
-    var display_unit = packet.party[0];
-    console.log("HEY HEY " + display_unit.unit_class);
-    this.playerSprite = this.add.sprite(1, 1, display_unit.unit_class);
-    this.playerSprite.setDepth(2);
-    this.playerSprite.scale = 1;
-    this.cameras.main.startFollow(this.playerSprite);
-    this.cameras.main.roundPixels = true;
-    this.cameras.main.setFollowOffset(-120, -80)
-    this.player = new Player(this.playerSprite, new Phaser.Math.Vector2(packet.x, packet.y));
+    this.addPlayer(packet, true);
+    this.player = new Player(this.loadedPlayers[packet.name].sprite, new Phaser.Math.Vector2(packet.x, packet.y));
     this.player.socket = this.socket;
-    this.playerSprite.play(display_unit.unit_class+"_idle");
-    console.log(display_unit.unit_class);
 
     this.gridPhysics = new GridPhysics(this.player, this.currentMap["map"]);
     this.gridControls = new GridControls(this.input, this.gridPhysics);
@@ -133,6 +171,17 @@ export class GameScene extends Phaser.Scene {
       this.handleLogin(data);
       console.log("HOLY SHIT " + JSON.stringify(data));
     }.bind(this))
+    this.socket.on('addPlayer', function(data) {
+      if (data.name != this.mainPlayer.name)
+        this.addPlayer(data, false);
+    }.bind(this));
+    this.socket.on('removePlayer', function(data) {
+      this.removePlayer(data)
+    }.bind(this));
+    this.socket.on('updatePlayer', function(data) {
+      this.updatePlayer(data);
+      //this.updatePlayer(data);
+    }.bind(this));
     this.linkAnims();
     this.loadMap("spawn");
   }

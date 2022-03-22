@@ -51,6 +51,13 @@ function loadPlayer(id) {
     socketRegistry[players[id].socket.id] = players[id];
     if (players[id].online == true) {
         players[id].socket.emit('loginDataDump', JSON.parse(players[id].toString()));
+        for (var p in maps[players[id].map_id].players) {
+            if (maps[players[id].map_id].players[p].id != id) {
+                console.log("sending " + maps[players[id].map_id].players[p].name);
+                maps[players[id].map_id].players[p].socket.emit('addPlayer', JSON.parse(players[id].toString()));
+                players[id].socket.emit('addPlayer', JSON.parse(maps[players[id].map_id].players[p].toString()));
+            }
+        }
     } else {
         setTimeout(loadPlayer(id), 250);
     }
@@ -139,9 +146,14 @@ function initializePlayer(id, socket) {
                     players[id].party.push(characters[rows[i]["character"+it]]);
                 }
             }
+            players[id].map_id = rows[i].map_id;
+            players[id].x = rows[i].x;
+            players[id].y = rows[i].y;
             players[id].name = rows[i].username;
             console.log("Initialized2 " + players[id].name);
             players[id].online = true;
+            console.log(maps[rows[i].map_id].players);
+            maps[rows[i].map_id].players[id] = players[id];
             loadPlayer(id);
         }
     }.bind(this));
@@ -227,6 +239,7 @@ class Db {
                 var nm = new Map();
                 nm.name = rows[i].name;
                 nm.id = rows[i].id;
+                nm.players = {};
                 maps[nm.id] = nm;
             }
         })
@@ -261,7 +274,7 @@ io.on('connection', function (socket) {
 
     socket.on('disconnect', function () {
         console.log('A user disconnected: ' + socket.id);
-        for (var player in players) {
+        for (var player in players) { // need to call a remove player function on client
             if (players[player].online && players[player].socket.id == socket.id)
                 delete players[player];
         }
@@ -276,6 +289,9 @@ io.on('connection', function (socket) {
 
     socket.on('move', function(data) {
         socketRegistry[socket.id].move(data.direction);
+        for (var p in maps[socketRegistry[socket.id].map_id].players) {
+            maps[socketRegistry[socket.id].map_id].players[p].socket.emit('updatePlayer', JSON.parse(socketRegistry[socket.id].toString()));
+        }
         console.log(socketRegistry[socket.id].name + " moved. new loc: " + socketRegistry[socket.id].x + ", " + socketRegistry[socket.id].y);
     }.bind(this));
 }.bind(this));

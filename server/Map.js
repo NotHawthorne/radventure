@@ -1,10 +1,14 @@
 export class Map {
     id = 0;
     monster_spawns = {};
-    players = [];
+    players = {};
     entities = [];
     name = "UNK";
     getRandomEncounterParty() {
         // return random array of monsters
+    }
+
+    constructor() {
+
     }
 }
