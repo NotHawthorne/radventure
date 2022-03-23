@@ -6,8 +6,12 @@
     <style>
       body {
         background: black;
+        margin-top: -10px;
       }
     </style>
+    <link rel="preload" as="GameFont" href="sprites/GUI/SDS_8x8.ttf" type="font/ttf" />
+    <link href="main.css" type="text/css" />
+    <div style="font-family:GameFont; position:absolute; left:-1000px; visibility:hidden;">.</div>
   </head>
   <body>
       <script src="//cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>

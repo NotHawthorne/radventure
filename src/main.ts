@@ -6,8 +6,11 @@ import {io} from 'socket.io-client';
 const mapData = require("../data/mapData.json");
 const tileData = require("../data/tileData.json");
 const classData = require("../data/classData.json");
+const unitData = require("../data/unitData.json");
 import { LoginScene } from "./LoginScene";
 import { UiScene } from "./UiScene";
+import { BattleScene } from "./BattleScene";
+import eventsCenter from './EventsCenter'
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
@@ -87,16 +90,33 @@ export class GameScene extends Phaser.Scene {
         "spacing": 0
       });
     }
+    for (const c of unitData["units"]) {
+      this.load.spritesheet(c["name"], c["sprite"], {
+        "frameWidth": 16,
+        "frameHeight": 165,
+        "startFrame": 0,
+        "endFrame": 1,
+        "spacing": 0
+      });
+    }
   }
 
   public linkAnims() {
     console.log("linking anims...");
     for (const c of classData["classes"])
       this.anims.create({"key": c["name"]+"_idle", "frameRate": 1, "frames": this.anims.generateFrameNumbers(c["name"], { frames: [ 0, 1 ] }), repeat: -1});
+    for (const c of unitData["units"])
+      this.anims.create({"key": c["name"]+"_idle", "frameRate": 1, "frames": this.anims.generateFrameNumbers(c["name"], { frames: [ 0, 1 ] }), repeat: -1});
   }
 
   public handleInput(event) {
 
+  }
+
+  public encounterStart(data) {
+    game.scene.start('BattleScene');
+    eventsCenter.emit('startBattle', data);
+    console.log("HI");
   }
 
   public addPlayer(player, isSelf) {
@@ -108,12 +128,13 @@ export class GameScene extends Phaser.Scene {
       console.log(this.mainPlayer.sprite.x, this.mainPlayer.sprite.y);
     this.loadedPlayers[player.name].sprite.setDepth(2);
     this.loadedPlayers[player.name].sprite.scale = 1;
-      this.loadedPlayers[player.name].sprite.offsetX = 8;
-      this.loadedPlayers[player.name].sprite.offsetY = 8;
+    this.loadedPlayers[player.name].sprite.offsetX = 8;
+    this.loadedPlayers[player.name].sprite.offsetY = 8;
     this.loadedPlayers[player.name].sprite.setPosition((Number(player.x) * 16) + 8, (player.y * 16) + 8);
     if (isSelf == true) {
       console.log(this.loadedPlayers[player.name].sprite.x, this.loadedPlayers[player.name].sprite.y);
       this.loadedPlayers[player.name].sprite.setPosition((Number(player.x) * 16) + 8, (player.y * 16) + 16);
+      this.loadedPlayers[player.name].sprite.setDepth(3);
       this.loadedPlayers[player.name].sprite.offsetY = 16;
       this.loadedPlayers[player.name].sprite.x = player.x * 16;
       this.loadedPlayers[player.name].sprite.y = player.y * 16;
@@ -163,25 +184,12 @@ export class GameScene extends Phaser.Scene {
   public create() {
     this.input.keyboard.on('keydown', this.handleInput);
     this.socket = io('http://localhost:4242');
-    this.socket.on('connect', function() {
-      console.log("CONNECTED");
-      this.socket.emit('login', {username: this.registry.get('user'), password: this.registry.get('pass')});
-    }.bind(this));
-    this.socket.on('loginDataDump', function(data) {
-      this.handleLogin(data);
-      console.log("HOLY SHIT " + JSON.stringify(data));
-    }.bind(this))
-    this.socket.on('addPlayer', function(data) {
-      if (data.name != this.mainPlayer.name)
-        this.addPlayer(data, false);
-    }.bind(this));
-    this.socket.on('removePlayer', function(data) {
-      this.removePlayer(data)
-    }.bind(this));
-    this.socket.on('updatePlayer', function(data) {
-      this.updatePlayer(data);
-      //this.updatePlayer(data);
-    }.bind(this));
+    this.socket.on('connect', function() { this.socket.emit('login', { username: this.registry.get('user'), password: this.registry.get('pass')}); }.bind(this));
+    this.socket.on('loginDataDump', function(data) { this.handleLogin(data); }.bind(this))
+    this.socket.on('addPlayer', function(data) { if (data.name != this.mainPlayer.name) this.addPlayer(data, false); }.bind(this));
+    this.socket.on('removePlayer', function(data) { this.removePlayer(data); }.bind(this));
+    this.socket.on('updatePlayer', function(data) { this.updatePlayer(data);}.bind(this));
+    this.socket.on('encounterStart', function(data) { this.encounterStart(data); }.bind(this));
     this.linkAnims();
     this.loadMap("spawn");
   }
@@ -206,7 +214,7 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
     antialias: false,
   },
   type: Phaser.AUTO,
-  scene: [ LoginScene, GameScene, UiScene ],
+  scene: [ LoginScene, GameScene, UiScene, BattleScene ],
   scale: {
     width: CANVAS_WIDTH,
     height: CANVAS_HEIGHT,

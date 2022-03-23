@@ -3,6 +3,7 @@ const { Item } = require('./Item.js');
 const { Player } = require('./Player.js');
 const { Unit } = require('./Unit.js');
 const { StatContainer } = require('./StatContainer');
+const { Map } = require('./Map.js');
 require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
@@ -31,7 +32,7 @@ const maps = {};
 const dbInit = 0;
 const dbLoaded = 0;
 
-const enemyBase = {};
+const unitBase = {};
 const itemBase = {};
 const enchantBase = {};
 const characters = {};
@@ -53,7 +54,6 @@ function loadPlayer(id) {
         players[id].socket.emit('loginDataDump', JSON.parse(players[id].toString()));
         for (var p in maps[players[id].map_id].players) {
             if (maps[players[id].map_id].players[p].id != id) {
-                console.log("sending " + maps[players[id].map_id].players[p].name);
                 maps[players[id].map_id].players[p].socket.emit('addPlayer', JSON.parse(players[id].toString()));
                 players[id].socket.emit('addPlayer', JSON.parse(maps[players[id].map_id].players[p].toString()));
             }
@@ -150,9 +150,7 @@ function initializePlayer(id, socket) {
             players[id].x = rows[i].x;
             players[id].y = rows[i].y;
             players[id].name = rows[i].username;
-            console.log("Initialized2 " + players[id].name);
             players[id].online = true;
-            console.log(maps[rows[i].map_id].players);
             maps[rows[i].map_id].players[id] = players[id];
             loadPlayer(id);
         }
@@ -163,10 +161,6 @@ function getPlayerInfo(id) {
 
 }
 
-
-function generateEncounter() {
-
-}
 
 class Db {
     static mysql = require('mysql');
@@ -240,8 +234,36 @@ class Db {
                 nm.name = rows[i].name;
                 nm.id = rows[i].id;
                 nm.players = {};
+                nm.monster_spawns = { "spawns": [] };
+                nm.total_weight = 0;
                 maps[nm.id] = nm;
             }
+            console.log("Loaded " + rows.length + " entries from maps db.");
+        });
+        Db.con.query('SELECT * FROM enemies', function (err, rows, fields) {
+            if (err) throw err;
+            for (var i = 0; i < rows.length; i++) {
+                var nu = new Unit();
+                nu.name = rows[i].name;
+                nu.id = rows[i].id;
+                nu.level = rows[i].level;
+                nu.stats.minimum_damage = rows[i].min_dmg;
+                nu.stats.maximum_damage = rows[i].max_dmg;
+                nu.stats.armor = rows[i].armor;
+                nu.stats.spell_resistance = rows[i].spell_resistance;
+                nu.stats.dodge_chance = rows[i].dodge;
+                nu.unit_class = nu.name;
+                unitBase[rows[i].id] = nu;
+            }
+            console.log("Loaded " + rows.length + " entries from enemy db.");
+        })
+        Db.con.query('SELECT * FROM map_spawns', function (err, rows, fields) {
+            if (err) throw err;
+            for (var i = 0; i < rows.length; i++) {
+                maps[rows[i].map_id].monster_spawns.spawns.push({"id": rows[i].enemy_id, "weight": rows[i].weight, "unit": unitBase[rows[i].enemy_id]});
+                maps[rows[i].map_id].total_weight += rows[i].weight;
+            }
+            console.log('Loaded ' + rows.length + ' map spawn entries.');
         })
         this.dbLoaded = 1;
     }
@@ -262,6 +284,13 @@ function gameTick() {
     if (this.dbInit == 1 && dbLoaded == 0) {
         initDb();
     }
+}
+
+function startEncounter(player) {
+    console.log(maps[player.map_id].name);
+    var enc = maps[player.map_id].genEncounter();
+    console.log("!" + enc.toString());
+    player.socket.emit('encounterStart', JSON.parse(enc.toString()));
 }
 
 setInterval(gameTick, 500);
@@ -292,6 +321,8 @@ io.on('connection', function (socket) {
         for (var p in maps[socketRegistry[socket.id].map_id].players) {
             maps[socketRegistry[socket.id].map_id].players[p].socket.emit('updatePlayer', JSON.parse(socketRegistry[socket.id].toString()));
         }
+        if (Math.floor(Math.random() * 100) >= 10)
+            startEncounter(socketRegistry[socket.id]);
         console.log(socketRegistry[socket.id].name + " moved. new loc: " + socketRegistry[socket.id].x + ", " + socketRegistry[socket.id].y);
     }.bind(this));
 }.bind(this));

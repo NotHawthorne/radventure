@@ -1,0 +1,6 @@
+{
+    "units": [
+        { "name": "Moblin", "sprite": "sprites/Characters/moblin.png" },
+        { "name": "Bandit", "sprite": "sprites/Characters/unit0.png" }
+    ]
+}

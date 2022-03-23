@@ -1,12 +1,13 @@
 import * as Phaser from 'phaser'
 import { game } from './main'
 
+var textStyle = {'fill': '#FFF', 'fontFamily': 'GameFont'};
+
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
     active: true,
     visible: true,
     key: "Login"
 };
-
 export class LoginScene extends Phaser.Scene
 {
     label = null;
@@ -26,7 +27,7 @@ export class LoginScene extends Phaser.Scene
 
 	preload()
     {
-        this.label = this.add.text(200, 200, "ENTER YOUR USERNAME"); 
+        this.label = this.add.text(200, 200, "ENTER YOUR USERNAMEe", { 'fontFamily': 'GameFont' }); 
         this.inputField = this.add.text(200, 220, "_");
         console.log("LOADED");
     }
