@@ -44,7 +44,6 @@ export class Unit {
             "\"unit_class\": \"" + this.unit_class + "\", " + 
             "\"experience\": " + this.experience + 
             "}";
-        console.log("[!]" + ret);
         return ret;
     }
 

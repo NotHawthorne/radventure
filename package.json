@@ -28,6 +28,7 @@
     "html-webpack-plugin": "^5.5.0",
     "phaser": "3.52.0",
     "phaser-input": "^1.2.6",
+    "phaser3-rex-plugins": "^1.1.68",
     "socket.io-client": "^4.4.1"
   }
 }

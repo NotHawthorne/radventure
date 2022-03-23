@@ -11,6 +11,10 @@ import { LoginScene } from "./LoginScene";
 import { UiScene } from "./UiScene";
 import { BattleScene } from "./BattleScene";
 import eventsCenter from './EventsCenter'
+import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+import ButtonPlugin from 'phaser3-rex-plugins/plugins/button-plugin.js';
+import AnchorPlugin from 'phaser3-rex-plugins/plugins/anchor-plugin.js';
+import Button from "phaser3-rex-plugins/plugins/button";
 
 const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
   active: false,
@@ -172,6 +176,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   public handleLogin(packet) {
+    console.log("Starting scene");
     game.scene.start('UiScene');
     this.addPlayer(packet, true);
     this.player = new Player(this.loadedPlayers[packet.name].sprite, new Phaser.Math.Vector2(packet.x, packet.y));
@@ -179,6 +184,8 @@ export class GameScene extends Phaser.Scene {
 
     this.gridPhysics = new GridPhysics(this.player, this.currentMap["map"]);
     this.gridControls = new GridControls(this.input, this.gridPhysics);
+
+    console.log("EMIT");
 
     eventsCenter.emit('populateInfo', packet);
   }
@@ -217,6 +224,23 @@ export class GameScene extends Phaser.Scene {
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
   title: "RadVenture",
+  plugins: {
+    scene: [{
+      key: 'rexUI',
+      plugin: UIPlugin,
+      mapping: 'rexUI'
+    }],
+    global: [{
+      key: 'rexButton',
+      plugin: ButtonPlugin,
+      start: true
+    },
+    {
+      key: 'rexAnchor',
+      plugin: AnchorPlugin,
+      start: true
+    }]
+  },
   render: {
     antialias: false,
   },

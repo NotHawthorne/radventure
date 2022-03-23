@@ -51,6 +51,7 @@ function loadPlayer(id) {
     console.log("Loading player " + players[id].name + "...");
     socketRegistry[players[id].socket.id] = players[id];
     if (players[id].online == true) {
+        console.log("SENDING PLAYER");
         players[id].socket.emit('loginDataDump', JSON.parse(players[id].toString()));
         for (var p in maps[players[id].map_id].players) {
             if (maps[players[id].map_id].players[p].id != id) {
