@@ -179,18 +179,25 @@ export class GameScene extends Phaser.Scene {
 
     this.gridPhysics = new GridPhysics(this.player, this.currentMap["map"]);
     this.gridControls = new GridControls(this.input, this.gridPhysics);
+
+    eventsCenter.emit('populateInfo', packet);
   }
 
   public create() {
+    // bind input
     this.input.keyboard.on('keydown', this.handleInput);
+    // create websocket
     this.socket = io('http://localhost:4242');
+    //routes
     this.socket.on('connect', function() { this.socket.emit('login', { username: this.registry.get('user'), password: this.registry.get('pass')}); }.bind(this));
     this.socket.on('loginDataDump', function(data) { this.handleLogin(data); }.bind(this))
     this.socket.on('addPlayer', function(data) { if (data.name != this.mainPlayer.name) this.addPlayer(data, false); }.bind(this));
     this.socket.on('removePlayer', function(data) { this.removePlayer(data); }.bind(this));
-    this.socket.on('updatePlayer', function(data) { this.updatePlayer(data);}.bind(this));
+    this.socket.on('updatePlayer', function(data) { this.updatePlayer(data); }.bind(this));
     this.socket.on('encounterStart', function(data) { this.encounterStart(data); }.bind(this));
+    //connect sprites to animations
     this.linkAnims();
+    //start map
     this.loadMap("spawn");
   }
 

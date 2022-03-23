@@ -108,32 +108,19 @@ function initializePlayer(id, socket) {
             u.stats.armor = rows[i].armor;
             u.stats.minimum_damage = rows[i].min_damage;
             u.stats.maximum_damage = rows[i].max_damage;
-            if (rows[i].head > 0)
-                u.equipment.head = itemInstance[rows[i].head];
-            if (rows[i].shoulders > 0)
-                u.equipment.shoulders = itemInstance[rows[i].shoulders];
-            if (rows[i].chest > 0)
-                u.equipment.chest = itemInstance[rows[i].chest];
-            if (rows[i].pants > 0)
-                u.equipment.pants = itemInstance[rows[i].pants];
-            if (rows[i].gloves > 0)
-                u.equipment.gloves = itemInstance[rows[i].gloves];
-            if (rows[i].feet > 0)
-                u.equipment.feet = itemInstance[rows[i].feet];
-            if (rows[i].ring1 > 0)
-                u.equipment.ring1 = itemInstance[rows[i].ring1];
-            if (rows[i].ring2 > 0)
-                u.equipment.ring2 = itemInstance[rows[i].ring2];
-            if (rows[i].mainhand > 0)
-                u.equipment.mainhand = itemInstance[rows[i].mainhand];
-            if (rows[i].offhand > 0)
-                u.equipment.offhand = itemInstance[rows[i].offhand];
-            if (rows[i].neck > 0)
-                u.equipment.neck = itemInstance[rows[i].neck];
-            if (rows[i].extra_slot0)
-                u.equipment.extra_slot0 = itemInstance[rows[i].extra_slot0];
-            if (rows[i].extra_slot1)
-                u.equipment.extra_slot1 = itemInstance[rows[i].extra_slot1];
+            u.equipment.head = rows[i].head > 0 ? itemInstance[rows[i].head] : null;
+            u.equipment.chest = rows[i].chest > 0 ? itemInstance[rows[i].chest] : null;
+            u.equipment.shoulders = rows[i].shoulders > 0 ? itemInstance[rows[i].shoulders] : null;
+            u.equipment.pants = rows[i].pants > 0 ? itemInstance[rows[i].pants] : null;
+            u.equipment.gloves = rows[i].gloves > 0 ? itemInstance[rows[i].gloves] : null;
+            u.equipment.feet = rows[i].feet > 0 ? itemInstance[rows[i].feet] : null;
+            u.equipment.ring1 = rows[i].ring1 > 0 ? itemInstance[rows[i].ring1] : null;
+            u.equipment.ring2 = rows[i].ring2 > 0 ? itemInstance[rows[i].ring2] : null;
+            u.equipment.mainhand = rows[i].mainhand > 0 ? itemInstance[rows[i].mainhand] : null;
+            u.equipment.offhand = rows[i].offhand > 0 ? itemInstance[rows[i].offhand] : null;
+            u.equipment.neck = rows[i].neck > 0 ? itemInstance[rows[i].neck] : null;
+            u.equipment.extra_slot0 = rows[i].extra_slot0 > 0 ? itemInstance[rows[i].extra_slot0] : null;
+            u.equipment.extra_slot1 = rows[i].extra_slot1 > 0 ? itemInstance[rows[i].extra_slot1] : null;
             players[id].camp.push(u);
             characters[u.uuid] = u;
         }

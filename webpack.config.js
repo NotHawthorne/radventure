@@ -35,15 +35,6 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      inject: 'body',
-      template: 'login.html',
-      filename: 'login.html',
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true
-      }
-    }),
     new CopyWebpackPlugin({
       patterns: [
         {

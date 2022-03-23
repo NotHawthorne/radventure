@@ -13,14 +13,16 @@ export class Unit {
     experience = 0;
 
     toString() {
-        var invenStr = "[ "
+        var invenStr = "{ "
+        var i = 0;
         for (var item in this.equipment) {
-            if (item > 0) {
+            if (i++ > 0) {
                 invenStr += ", "
             }
-            invenStr += this.equipment[item].toString();
+            invenStr += "\"" + item + "\":";
+            invenStr += this.equipment[item] != null ? this.equipment[item].toString() : "null";
         }
-        invenStr += "]"
+        invenStr += "}"
 
         var effectsStr = "[ ";
         for (var effect in this.effects) {
@@ -42,6 +44,7 @@ export class Unit {
             "\"unit_class\": \"" + this.unit_class + "\", " + 
             "\"experience\": " + this.experience + 
             "}";
+        console.log("[!]" + ret);
         return ret;
     }
 
