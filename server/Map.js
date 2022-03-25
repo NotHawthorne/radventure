@@ -14,11 +14,13 @@ export class Map {
         var ret = new Encounter();
         ret.party_a = [];
         ret.party_b = [];
-        while (ret.party_b.length == 0) {
+        var init_total_weight = (this.total_weight * 2);
+        while (ret.party_b.length == 0 && ret.party_b.length < 5) {
             for (const mob in this.monster_spawns.spawns) {
-                if (Math.floor(Math.random() * this.total_weight) <= this.monster_spawns.spawns[mob].weight && ret.party_b.length <= 5) {
-                    console.log("HI " + this.monster_spawns.spawns[mob].unit);
+                var roll = Math.random() * init_total_weight;
+                while (roll > this.monster_spawns.spawns[mob].weight && ret.party_b.length < 5) {
                     ret.party_b.push(this.monster_spawns.spawns[mob].unit);
+                    roll /= 2;
                 }
             }
         }

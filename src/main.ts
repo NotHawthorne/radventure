@@ -47,6 +47,10 @@ export class GameScene extends Phaser.Scene {
   private loadedUnits = {};
   private loadedPlayers = {};
 
+  private inBattle = false;
+
+  private state = null;
+
   constructor() {
     super(sceneConfig);
   }
@@ -82,10 +86,10 @@ export class GameScene extends Phaser.Scene {
     }
   }
 
-  public preloadSprites() {
+  public static preloadSprites(scene: Phaser.Scene) {
     console.log("sprites");
     for (const c of classData["classes"]) {
-      this.load.spritesheet(c["name"], c["sprite"], {
+      scene.load.spritesheet(c["name"], c["sprite"], {
         "frameWidth": 16,
         "frameHeight": 16,
         "startFrame": 0,
@@ -95,7 +99,7 @@ export class GameScene extends Phaser.Scene {
       });
     }
     for (const c of unitData["units"]) {
-      this.load.spritesheet(c["name"], c["sprite"], {
+      scene.load.spritesheet(c["name"], c["sprite"], {
         "frameWidth": 16,
         "frameHeight": 165,
         "startFrame": 0,
@@ -105,12 +109,12 @@ export class GameScene extends Phaser.Scene {
     }
   }
 
-  public linkAnims() {
+  public static linkAnims(scene: Phaser.Scene) {
     console.log("linking anims...");
     for (const c of classData["classes"])
-      this.anims.create({"key": c["name"]+"_idle", "frameRate": 1, "frames": this.anims.generateFrameNumbers(c["name"], { frames: [ 0, 1 ] }), repeat: -1});
+      scene.anims.create({"key": c["name"]+"_idle", "frameRate": 1, "frames": scene.anims.generateFrameNumbers(c["name"], { frames: [ 0, 1 ] }), repeat: -1});
     for (const c of unitData["units"])
-      this.anims.create({"key": c["name"]+"_idle", "frameRate": 1, "frames": this.anims.generateFrameNumbers(c["name"], { frames: [ 0, 1 ] }), repeat: -1});
+      scene.anims.create({"key": c["name"]+"_idle", "frameRate": 1, "frames": scene.anims.generateFrameNumbers(c["name"], { frames: [ 0, 1 ] }), repeat: -1});
   }
 
   public handleInput(event) {
@@ -119,7 +123,7 @@ export class GameScene extends Phaser.Scene {
 
   public encounterStart(data) {
     game.scene.start('BattleScene');
-    eventsCenter.emit('startBattle', data);
+    eventsCenter.emit('stateChange', {"state": "battle", "data": data} );
     console.log("HI");
   }
 
@@ -180,6 +184,7 @@ export class GameScene extends Phaser.Scene {
     game.scene.start('UiScene');
     this.addPlayer(packet, true);
     this.player = new Player(this.loadedPlayers[packet.name].sprite, new Phaser.Math.Vector2(packet.x, packet.y));
+    eventsCenter.emit('stateChange', {"state": "world", "data": packet});
     this.player.socket = this.socket;
 
     this.gridPhysics = new GridPhysics(this.player, this.currentMap["map"]);
@@ -190,20 +195,38 @@ export class GameScene extends Phaser.Scene {
     eventsCenter.emit('populateInfo', packet);
   }
 
+  public stateChange(data) {
+    this.state = data.state;
+    switch (data.state) {
+      case "battle":
+        this.player.isInBattle = true;
+        break ;
+      case "world":
+        this.player.isInBattle = false;
+        break ;
+      default:
+        console.log("GameScene switched states.");
+        break ;
+    }
+  }
+
   public create() {
     // bind input
     this.input.keyboard.on('keydown', this.handleInput);
     // create websocket
     this.socket = io('http://localhost:4242');
-    //routes
+    //api routes
     this.socket.on('connect', function() { this.socket.emit('login', { username: this.registry.get('user'), password: this.registry.get('pass')}); }.bind(this));
-    this.socket.on('loginDataDump', function(data) { this.handleLogin(data); }.bind(this))
+    this.socket.on('loginDataDump', function(data) { this.handleLogin(data); }.bind(this));
     this.socket.on('addPlayer', function(data) { if (data.name != this.mainPlayer.name) this.addPlayer(data, false); }.bind(this));
     this.socket.on('removePlayer', function(data) { this.removePlayer(data); }.bind(this));
     this.socket.on('updatePlayer', function(data) { this.updatePlayer(data); }.bind(this));
     this.socket.on('encounterStart', function(data) { this.encounterStart(data); }.bind(this));
+    this.socket.on('encounterEnd', function(data) { this.encounterEnd(data); }.bind(this));
+    //local routes
+    eventsCenter.on('stateChange', function(data) { this.stateChange(data) }.bind(this));
     //connect sprites to animations
-    this.linkAnims();
+    GameScene.linkAnims(this);
     //start map
     this.loadMap("spawn");
   }
@@ -218,7 +241,7 @@ export class GameScene extends Phaser.Scene {
   public preload() {
       this.preloadTiles();
       this.preloadMaps();
-      this.preloadSprites();
+      GameScene.preloadSprites(this);
   }
 }
 

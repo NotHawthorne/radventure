@@ -32,7 +32,6 @@ export class GridPhysics {
       if (!this.isMoving()) {
           this.startMoving(direction);
       }
-      console.log(this.player.getTilePos());
   }
 
   private isMoving(): boolean {
@@ -56,7 +55,7 @@ export class GridPhysics {
   private move(direction: Direction) {
     const newPos: Vector2 = this.player.getPosition();
     if (this.isMoving() && this.shouldContinueMoving()) {
-        if (Math.round(this.walkCooldown) <= 0) {
+        if (Math.round(this.walkCooldown) <= 0 && this.player.isInBattle == false) {
             switch (this.movementDirection.valueOf()) {
                 case Direction.UP.valueOf():
                     newPos.add(new Vector2(0, -16));
@@ -119,7 +118,6 @@ export class GridPhysics {
     );
   }
   private shouldContinueMoving(): boolean {
-      console.log(this.movementDirection, this.lastMovementIntent, this.isBlockingDirection(this.lastMovementIntent));
     return (
       this.movementDirection == this.lastMovementIntent &&
       !this.isBlockingDirection(this.lastMovementIntent)

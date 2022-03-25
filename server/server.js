@@ -240,6 +240,10 @@ class Db {
                 nu.stats.armor = rows[i].armor;
                 nu.stats.spell_resistance = rows[i].spell_resistance;
                 nu.stats.dodge_chance = rows[i].dodge;
+                nu.stats.health = rows[i].health;
+                nu.stats.max_health = rows[i].health;
+                nu.stats.mana = rows[i].mana;
+                nu.stats.max_mana = rows[i].mana;
                 nu.unit_class = nu.name;
                 unitBase[rows[i].id] = nu;
             }
@@ -277,6 +281,9 @@ function gameTick() {
 function startEncounter(player) {
     console.log(maps[player.map_id].name);
     var enc = maps[player.map_id].genEncounter();
+    for (var p in player.party) {
+        enc.party_a.push(player.party[p]);
+    }
     console.log("!" + enc.toString());
     player.socket.emit('encounterStart', JSON.parse(enc.toString()));
 }
@@ -305,6 +312,9 @@ io.on('connection', function (socket) {
     }.bind(this));
 
     socket.on('move', function(data) {
+        if (!(socket.id in socketRegistry)) {
+            console.log("Uninitialized user requesting move. Discarding packet.");
+        }
         socketRegistry[socket.id].move(data.direction);
         for (var p in maps[socketRegistry[socket.id].map_id].players) {
             maps[socketRegistry[socket.id].map_id].players[p].socket.emit('updatePlayer', JSON.parse(socketRegistry[socket.id].toString()));

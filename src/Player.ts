@@ -19,6 +19,7 @@ export class Player {
 
   public party: Party;
   public socket;
+  public isInBattle = false;
 
   getTilePos(): Phaser.Math.Vector2 {
     return this.tilePos.clone();

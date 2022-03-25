@@ -173,7 +173,7 @@ export class PhaserTooltip {
                 targets: this.tooltipCollection[id].container,
                 alpha: 1,
                 ease: 'Power1',
-                duration: 50,
+                duration: 0,
                 delay: 0,
                 onComplete: o => {
                     //this.tween = null;
@@ -292,6 +292,7 @@ export class PhaserTooltip {
             let shadowFill = options.text.shadowFill || true;
             text.setShadow(0, 0, shadowColor, blur, shadowStroke, shadowFill);
         }
+            text.setDepth(30);
 
 
         return text;
@@ -325,8 +326,6 @@ export class PhaserTooltip {
             alpha: 0.9
         };
 
-        console.log("CREATING BACKGROUND");
-
         var graphics;
         if (this.scene.graphics != null) {
             var graphics = this.scene.add.graphics({
@@ -335,9 +334,10 @@ export class PhaserTooltip {
             });
         }
         else {
+            this.scene.graphics = this.scene.add.graphics();
+            this.scene.graphics.setDepth(13);
             this.scene.graphics.lineStyle = lineStyle;
             this.scene.graphics.fillStyle = fillStyle;
-            console.log("setting fill styles");
         }
 
         let _width = width >= (content.displayWidth + paddingLeft + paddingRight) ? width : content.displayWidth + paddingLeft + paddingRight;
@@ -346,9 +346,10 @@ export class PhaserTooltip {
         var rect = new Phaser.Geom.Rectangle(options.html === undefined ? -_width / 2 + container.width / 2 : -_width / 2, 0, _width, _height);
         rect.width = _width;
         rect.height = _height;
-        graphics.fillRectShape(rect);
-        container.add(graphics);
+        this.scene.graphics.fillRectShape(rect);
+        container.add(this.scene.graphics);
 
+        this.scene.graphics.setDepth(0);
         return { rect: rect, graphic: graphics };
     }
 

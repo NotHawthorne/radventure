@@ -99,36 +99,44 @@ export class UiScene extends Phaser.Scene {
         super(UiScene.sceneConfig);
     }
 
-    createBtn (scene, config, column) {
+    static createBtn (scene, config, column, callback) {
         var x = Phaser.Utils.Objects.GetValue(config, 'x', 0);
         var y = Phaser.Utils.Objects.GetValue(config, 'y', 0);
         var color = Phaser.Utils.Objects.GetValue(config, 'color', 0xffffff);
         var name = Phaser.Utils.Objects.GetValue(config, 'name', '');
 
-        //var btn = new Phaser.GameObjects.Rectangle(this, x, y, 120, 120, color, 1);
-        //btn.setDepth(1);
-        var btnText = this.add.text(x, y, name, UiScene.textStyle);
+        var btnText = scene.add.text(x, y, name, UiScene.textStyle);
         btnText.setDepth(4);
         
-        //btn.setInteractive();
-        //btn.on('click', function (button, gameObject) { console.log("clicked"); })
-        //console.log(btn);
-        //column.add(btnText);
-        //column.add(btn);
         btnText.setInteractive()
-            .on('pointerdown', function() { console.log("test") });
-        column.add(btnText);
+            .on('pointerdown', callback);
+        if (column != null)
+            column.add(btnText);
         return btnText;
+    }
+
+    static equipmentButtonCallback(data, button) {
+
     }
 
     public populateInfo(info) {
         this.row = new Row(this, -120, -300, 300, 200);
         this.column.add(this.row);
-        console.log("POPULATE");
         this.focusCharacter(info.party[0]);
         this.partyMenu = [];
         for (var i = 0; i != 5; i++) {
-            this.partyMenu.push(this.createBtn(this, {x: -120, y: 80 + (20 * i), name: info.party.length > i ? info.party[i].name : "Empty", color: 0xFFF}, this.column));
+            this.partyMenu.push(UiScene.createBtn(
+                this, 
+                {
+                    x: -120, 
+                    y: 80 + (20 * i), 
+                    name: info.party.length > i ? info.party[i].name : "Empty", color: 0xFFF
+                }, 
+                this.column, 
+                function (data, button) { 
+                    this.equipmentButtonCallback(data, button); 
+                }.bind(this)
+            ));
         }
     }
 
@@ -143,10 +151,9 @@ export class UiScene extends Phaser.Scene {
     }
     
     public focusCharacter(character) {
-        console.log("GOING");
         this.focusedCharacter = character;
         if (this.textInfo.focusedCharacter.name == null) {
-            this.textInfo.focusedCharacter.name = this.add.text(-120,-280,character.name);
+            this.textInfo.focusedCharacter.name = this.add.text(-120,-300,character.name + ", level " + character.level + " " + character.unit_class);
             this.column.add(this.textInfo.focusedCharacter.name);
         }
         else 
@@ -168,17 +175,55 @@ export class UiScene extends Phaser.Scene {
                     if (finalStats[x] > 0)
                         tooltip += "\n" + x + ": " + finalStats[x];
                 }
-                this.addTooltip(0, 0, this.textInfo.focusedCharacter.equipment[item], tooltip, this);
+                UiScene.addTooltip(0, 0, this.textInfo.focusedCharacter.equipment[item], tooltip, this, true);
             }
             i++;
         }
     }
 
+    public inspectorMenuCallback(data, button) { }
+
     public create() {
         this.inspectorMenu = [
-            this.createBtn(this, { name: "equipment", x: 0, y: 0, color: 0xFFF }, this.row),
-            this.createBtn(this, { name: "stats", x: 90, y: 0, color: 0xFFF }, this.row),
-            this.createBtn(this, { name: "abilities", x: 150, y: 0, color: 0xFFF }, this.row)
+            UiScene.createBtn(
+                this, 
+                { 
+                    name: "equipment", 
+                    x: 0, 
+                    y: 20, 
+                    color: 0xFFF 
+                }, 
+                this.row, 
+                function(data, button) { 
+                    this.inspectorMenuCallback(data, button); 
+                }.bind(this)
+            ),
+            UiScene.createBtn(
+                this, 
+                { 
+                    name: "stats", 
+                    x: 90, 
+                    y: 20, 
+                    color: 0xFFF 
+                }, 
+                this.row,
+                function(data, button) {
+                    this.inspectorMenuCallback(data, button);
+                }.bind(this)
+            ),
+            UiScene.createBtn(
+                this, 
+                { 
+                    name: "abilities", 
+                    x: 150, 
+                    y: 20, 
+                    color: 0xFFF 
+                }, 
+                this.row,
+                function(data, button) {
+                    this.inspectorMenuCallback(data, button);
+                }.bind(this)
+            )
         ]
     }
 
@@ -202,12 +247,12 @@ export class UiScene extends Phaser.Scene {
     public update(_time: number, delta: number) {
     }
     
-    public addTooltip(x, y, item, content, scene) {
+    public static addTooltip(x, y, item, content, scene, hasBackground) {
         var tooltipID = scene.tooltipID = Math.random() * 10000;
         scene._tooltip = scene.tooltip.createTooltip({
             x: item.getBounds().x,
             y: item.getBounds().y - 30,
-            hasBackground: true,
+            hasBackground: hasBackground,
             text: {
                 text: content
             },
@@ -237,7 +282,6 @@ export class UiScene extends Phaser.Scene {
             'pointerover',
                 function(pointer, item) {
                     scene.tooltip.showTooltip(tooltipID, true);
-                    console.log("HI");
                 },
                 scene
         );
